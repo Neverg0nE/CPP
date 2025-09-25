@@ -1,27 +1,30 @@
 #include <iostream>
 using namespace std;
 int main() {
+    // step1:Obtain data,get total weights
     int apples,oranges;
-    apples = oranges = 0;  // 初始化苹果和橘子的数量
+    apples = oranges = 0;  // Initialize the number of apples and oranges
     cout << "Enter the number of apples to buy:";
-    cin >> apples;  //得到苹果的数量
+    cin >> apples;  // Obtain the number of apples
     cout << "Enter the number of oranges to buy:";
-    cin >> oranges; //得到橘子的数量
-    int totalWeights = apples * 105 + oranges * 120; //计算水果总重量
-    cout << "The total weight is: " << totalWeights << "g"<< endl; //输出总重量，单位g
+    cin >> oranges; // Obtain the number of apples
+    int totalWeights = apples * 105 + oranges * 120; // Calculate the total weight of the fruits
+    cout << "The total weight is: " << totalWeights << "g"<< endl;
 
-    int temp,cnt100g,cnt50g,cnt20g,cnt10g,cnt5g;  //声明6个参数
-    temp = totalWeights/5; // 苹果和橘子的总重量肯定是5的倍数，引入临时变量代替总重量
-    cnt100g = temp/20; //100 = 20*5，先除以最大的得到100g的数量
-    cnt50g = (temp%20)/10; //50 = 10*5，只能得到0/1
-    cnt20g = (temp%10)/4;  //20 = 4*5，除以10得到凑不齐50的量
-    cnt10g = (temp-20*cnt100g-10*cnt50g-4*cnt20g)/2; //10 = 2*5，不用（temp%4）是为了规避
-    cnt5g = temp-20*cnt100g-10*cnt50g-4*cnt20g-2*cnt10g; // 由数量关系得到cnt5g
+    // step2:Search for the optimal solution
+    int temp,cnt100g,cnt50g,cnt20g,cnt10g,cnt5g;
+    temp = totalWeights/5; // The total weight of apples and oranges must be a multiple of 5. Introduce a temporary variable to represent the total weight.
+    cnt100g = temp/20; // 100 = 20*5.First, divide by the largest value to obtain a quantity of 100g.
+    cnt50g = (temp%20)/10; // 50 = 10*5，the remaining 50 part after removing the 100 part
+    cnt20g = (temp%10)/4;  // 20 = 4*5
+    cnt10g = (temp-20*cnt100g-10*cnt50g-4*cnt20g)/2; // 10 = 2*5.If here we write (temp % 4)/2.It would be a mistake
+    cnt5g = temp-20*cnt100g-10*cnt50g-4*cnt20g-2*cnt10g; // From the quantitative relationship，obtain cnt5g
 
+    // step3:Outcome
     cout << "100g-weight:" << cnt100g << endl;
     cout << "50g-weight:" << cnt50g << endl;
     cout << "20g-weight:" << cnt20g << endl;
     cout << "10g-weight:" << cnt10g << endl;
-    cout << "5g-weight:" << cnt5g << endl;
+    cout << "5g-weight:" << cnt5g << endl; // Produce the result
     return 0;
 }
