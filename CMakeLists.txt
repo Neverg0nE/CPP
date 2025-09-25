@@ -3,6 +3,4 @@ project(CPP)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(CPP
-        Hello_world.cpp
-        Hello_world2.cpp)
+add_executable(CPP)
